@@ -1,6 +1,6 @@
 package br.com.ActionX.Conexao;
 
-import br.com.ActionX.negocio.Funcionario;
+import br.com.ActionX.Negocio.Funcionario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

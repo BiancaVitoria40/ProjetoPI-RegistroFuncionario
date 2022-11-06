@@ -1,6 +1,6 @@
 package br.com.ActionX.Conexao;
 
-import br.com.ActionX.negocio.Login;
+import br.com.ActionX.Negocio.Login;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
