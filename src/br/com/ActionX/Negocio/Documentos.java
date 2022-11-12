@@ -2,6 +2,7 @@ package br.com.ActionX.Negocio;
 
 public class Documentos {
     
+    private int idFuncionario;
     private int id_documento;
     private String rg;
     private String cpf;
@@ -17,7 +18,8 @@ public class Documentos {
     public Documentos() {
     }
 
-    public Documentos(int id_documento, String rg, String cpf, String titulo_eleitor, String ctps, String serie, String uf, String certidao_nascimento, String certidao_civil, String reservista, String pis) {
+    public Documentos(int idFuncionario, int id_documento, String rg, String cpf, String titulo_eleitor, String ctps, String serie, String uf, String certidao_nascimento, String certidao_civil, String reservista, String pis) {
+        this.idFuncionario = idFuncionario;
         this.id_documento = id_documento;
         this.rg = rg;
         this.cpf = cpf;
@@ -29,6 +31,14 @@ public class Documentos {
         this.certidao_civil = certidao_civil;
         this.reservista = reservista;
         this.pis = pis;
+    }
+
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
 
     public int getId_documento() {
@@ -118,8 +128,8 @@ public class Documentos {
     public void setPis(String pis) {
         this.pis = pis;
     }
-    
-    
+
+   
     
     
 }

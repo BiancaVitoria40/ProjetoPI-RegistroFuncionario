@@ -13,18 +13,18 @@ public class Funcionario {
     private String dt_nascimento;
     private String nacionalidade;
     private String estado_civil;
-    private String status_func;
     private String dt_criacao;
     private String dt_atualizacao;
     private int qtd_dependente;
     private int qtd_pensionista;
+    private String status;
     
     
     public Funcionario(){
         
     }
 
-    public Funcionario(int idFuncionario, int idLogin, String nome, String email, String telefone, String genero, String raca, String dt_nascimento, String nacionalidade, String estado_civil, String status_func, String dt_criacao, String dt_atualizacao, int qtd_dependente, int qtd_pensionista) {
+    public Funcionario(int idFuncionario, int idLogin, String nome, String email, String telefone, String genero, String raca, String dt_nascimento, String nacionalidade, String estado_civil, String dt_criacao, String dt_atualizacao, int qtd_dependente, int qtd_pensionista, String status) {
         this.idFuncionario = idFuncionario;
         this.idLogin = idLogin;
         this.nome = nome;
@@ -35,11 +35,11 @@ public class Funcionario {
         this.dt_nascimento = dt_nascimento;
         this.nacionalidade = nacionalidade;
         this.estado_civil = estado_civil;
-        this.status_func = status_func;
         this.dt_criacao = dt_criacao;
         this.dt_atualizacao = dt_atualizacao;
         this.qtd_dependente = qtd_dependente;
         this.qtd_pensionista = qtd_pensionista;
+        this.status = status;
     }
 
     public int getIdFuncionario() {
@@ -122,14 +122,6 @@ public class Funcionario {
         this.estado_civil = estado_civil;
     }
 
-    public String getStatus_func() {
-        return status_func;
-    }
-
-    public void setStatus_func(String status_func) {
-        this.status_func = status_func;
-    }
-
     public String getDt_criacao() {
         return dt_criacao;
     }
@@ -162,6 +154,16 @@ public class Funcionario {
         this.qtd_pensionista = qtd_pensionista;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setStatus_func(String a) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

@@ -3,6 +3,7 @@ package br.com.ActionX.Negocio;
 public class Dependentes {
     
     private int id_dependentes;
+    private int idFuncionario;
     private String nome;
     private String email;
     private String telefone;
@@ -11,12 +12,14 @@ public class Dependentes {
     private String data_nascimento;
     private String genero;
     private String cpf;
+    private String status;
 
     public Dependentes() {
     }
 
-    public Dependentes(int id_dependentes , String nome, String email, String telefone, String tipo_dependente, String certidao, String data_nascimento, String genero, String cpf) {
+    public Dependentes(int id_dependentes, int idFuncionario, String nome, String email, String telefone, String tipo_dependente, String certidao, String data_nascimento, String genero, String cpf, String status) {
         this.id_dependentes = id_dependentes;
+        this.idFuncionario = idFuncionario;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -25,10 +28,7 @@ public class Dependentes {
         this.data_nascimento = data_nascimento;
         this.genero = genero;
         this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
+        this.status = status;
     }
 
     public int getId_dependentes() {
@@ -38,7 +38,18 @@ public class Dependentes {
     public void setId_dependentes(int id_dependentes) {
         this.id_dependentes = id_dependentes;
     }
-    
+
+    public int getId_funcionario() {
+        return idFuncionario;
+    }
+
+    public void setidFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -100,8 +111,12 @@ public class Dependentes {
         this.cpf = cpf;
     }
 
-   
-    
-    
-    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

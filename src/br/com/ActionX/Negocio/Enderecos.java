@@ -1,7 +1,9 @@
 package br.com.ActionX.Negocio;
 
 public class Enderecos {
-     
+    
+    private int id_endereco;
+    private int idFuncionario;
     private String logradouro;
     private String numero;
     private String complemento;
@@ -10,11 +12,14 @@ public class Enderecos {
     private String cidade;
     private String estado;
     private String pais;
+    private String status;
 
     public Enderecos() {
     }
 
-    public Enderecos(String logradouro, String numero, String complemento, String cep, String bairro, String cidade, String estado, String pais) {
+    public Enderecos(int id_endereco, int idFuncionario, String logradouro, String numero, String complemento, String cep, String bairro, String cidade, String estado, String pais, String status) {
+        this.id_endereco = id_endereco;
+        this.idFuncionario = idFuncionario;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -23,6 +28,23 @@ public class Enderecos {
         this.cidade = cidade;
         this.estado = estado;
         this.pais = pais;
+        this.status = status;
+    }
+
+    public int getId_endereco() {
+        return id_endereco;
+    }
+
+    public void setId_endereco(int id_endereco) {
+        this.id_endereco = id_endereco;
+    }
+
+    public int getidFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setidFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
 
     public String getLogradouro() {
@@ -88,6 +110,13 @@ public class Enderecos {
     public void setPais(String pais) {
         this.pais = pais;
     }
-    
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

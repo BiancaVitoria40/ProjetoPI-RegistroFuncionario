@@ -2,6 +2,7 @@ package br.com.ActionX.Negocio;
 
 public class Pensionista {
     
+    private int id_funcionario;
     private int id_pensionista;
     private String nome;
     private String cpf;
@@ -14,7 +15,8 @@ public class Pensionista {
     public Pensionista() {
     }
 
-    public Pensionista(int id_pensionista, String nome, String cpf, String cod_banco, String agencia, String tipo_conta, String conta, String digito) {
+    public Pensionista(int id_funcionario, int id_pensionista, String nome, String cpf, String cod_banco, String agencia, String tipo_conta, String conta, String digito) {
+        this.id_funcionario = id_funcionario;
         this.id_pensionista = id_pensionista;
         this.nome = nome;
         this.cpf = cpf;
@@ -23,6 +25,14 @@ public class Pensionista {
         this.tipo_conta = tipo_conta;
         this.conta = conta;
         this.digito = digito;
+    }
+
+    public int getId_funcionario() {
+        return id_funcionario;
+    }
+
+    public void setId_funcionario(int id_funcionario) {
+        this.id_funcionario = id_funcionario;
     }
 
     public int getId_pensionista() {
@@ -88,6 +98,6 @@ public class Pensionista {
     public void setDigito(String digito) {
         this.digito = digito;
     }
-    
-    
+
+
 }

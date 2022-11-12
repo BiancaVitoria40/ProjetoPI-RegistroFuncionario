@@ -2,23 +2,35 @@ package br.com.ActionX.Negocio;
 
 public class DadosBancarios {
     
+    private int idFuncionario;
     private int id_dadosBancarios;
     private String cod_banco;
     private String agencia;
     private String tipo_conta;
     private String conta;
     private String digito;
+    private String status;
 
     public DadosBancarios() {
     }
 
-    public DadosBancarios(int id_dadosBancarios, String cod_banco, String agencia, String tipo_conta, String conta, String digito) {
+    public DadosBancarios(int idFuncionario, int id_dadosBancarios, String cod_banco, String agencia, String tipo_conta, String conta, String digito, String status) {
+        this.idFuncionario = idFuncionario;
         this.id_dadosBancarios = id_dadosBancarios;
         this.cod_banco = cod_banco;
         this.agencia = agencia;
         this.tipo_conta = tipo_conta;
         this.conta = conta;
         this.digito = digito;
+        this.status = status;
+    }
+
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
 
     public int getId_dadosBancarios() {
@@ -69,7 +81,13 @@ public class DadosBancarios {
         this.digito = digito;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     
-    
-    
+
 }
