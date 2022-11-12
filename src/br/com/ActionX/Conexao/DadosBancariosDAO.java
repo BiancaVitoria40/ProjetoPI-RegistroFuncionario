@@ -1,13 +1,13 @@
 package br.com.ActionX.Conexao;
 
-import br.com.ActionX.Negocio.RedefineSenhas;
+import br.com.ActionX.Negocio.DadosBancarios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RedefineSenhasDAO {
+public class DadosBancariosDAO {
     
-        public void insereSolicitacao(RedefineSenhas senha) {
+        public void insereDadosBancarios(DadosBancarios banco) {
         Conexao conexao = new Conexao();
 
         PreparedStatement st = null;
@@ -16,15 +16,27 @@ public class RedefineSenhasDAO {
 
             String sql = "";
             sql += "";
-            sql += "INSERT INTO redefinesenhas"
-                    + "(ID_Login, "
-                    + "Dt_Criacao) "
+            sql += "INSERT INTO dadosbancarios"
+                    + "(`ID_Funcionario`," 
+                    + "`Cod_banco`," 
+                    + "`Agencia`," 
+                    + "`Tipo_Conta`," 
+                    + "`Conta`," 
+                    + "`Digito`," 
+                    + "`Status`)"
                     + "VALUES"
-                    + "(?, now())";
+                    + "(?, ?, ?, ?, ?, ?, ?)";
 
             st = conexao.getConexao().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            
-            st.setInt(1, senha.getId_redefineSenhas());
+
+            st.setInt(1, banco.getIdFuncionario());
+            st.setString(2, banco.getCod_banco());
+            st.setString(3, banco.getAgencia());
+            st.setString(4, banco.getTipo_conta());
+            st.setString(5, banco.getConta());
+            st.setString(6, banco.getDigito());
+            st.setString(7, banco.getStatus());
+        
 
             System.out.println(sql);
 
@@ -34,7 +46,7 @@ public class RedefineSenhasDAO {
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    senha.setId_redefineSenhas(id);
+                    banco.setId_dadosBancarios(id);
                 }
                 rs.close();
             } else {
@@ -48,8 +60,8 @@ public class RedefineSenhasDAO {
         }
 
     }
-    
-        public void deletarSolicitacao(RedefineSenhas senha) {
+        
+        public void atualizaDadosBancarios(DadosBancarios banco) {
         Conexao conexao = new Conexao();
 
         PreparedStatement st = null;
@@ -58,12 +70,26 @@ public class RedefineSenhasDAO {
 
             String sql = "";
             sql += "";
-            sql += "DELETE FROM redefinesenhas"
-                    + "WHERE ID_redefiniSenha = ?";
+            sql += "UPDATE registrofuncionario.dadosbancarios" +
+                    "SET" +
+                    "ID_Funcionario = ?," +
+                    "Cod_banco = ?," +
+                    "Agencia = ?," +
+                    "Tipo_Conta = ?," +
+                    "Conta = ?," +
+                    "Digito = ?," +
+                    "Status = ?" +
+                    "WHERE ID_DadosBancarios = ?;";
 
             st = conexao.getConexao().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            
-            st.setInt(1, senha.getId_redefineSenhas());
+
+            st.setInt(1, banco.getIdFuncionario());
+            st.setString(2, banco.getCod_banco());
+            st.setString(3, banco.getAgencia());
+            st.setString(4, banco.getTipo_conta());
+            st.setString(5, banco.getConta());
+            st.setString(6, banco.getDigito());
+            st.setString(7, banco.getStatus());
 
             System.out.println(sql);
 
@@ -73,7 +99,7 @@ public class RedefineSenhasDAO {
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    senha.setId_redefineSenhas(id);
+                    banco.setId_dadosBancarios(id);
                 }
                 rs.close();
             } else {
@@ -86,8 +112,5 @@ public class RedefineSenhasDAO {
             conexao.fechaConexao();
         }
 
-    }
-
-
-    
+    }   
 }

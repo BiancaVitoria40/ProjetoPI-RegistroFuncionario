@@ -4,7 +4,6 @@ import br.com.ActionX.Negocio.Funcionario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class FuncionariosDAO {
                 func.setDt_nascimento(resultado.getString("dt_nascimento"));
                 func.setNacionalidade(resultado.getString("Nacionalidade"));
                 func.setEstado_civil(resultado.getString("Estado_Civil"));
-                func.setStatus_func(resultado.getString("Status_Func"));
+                func.setStatus(resultado.getString("Status"));
                 func.setDt_criacao(resultado.getString("Dt_Criacao"));
                 func.setDt_atualizacao(resultado.getString("Dt_Atualizacao"));
                 func.setQtd_dependente(resultado.getInt("Qtd_Dependentes"));
@@ -110,7 +109,7 @@ public class FuncionariosDAO {
             func.setDt_nascimento(resultado.getString("dt_nascimento"));
             func.setNacionalidade(resultado.getString("Nacionalidade"));
             func.setEstado_civil(resultado.getString("Estado_Civil"));
-            func.setStatus_func(resultado.getString("Status_Func"));
+            func.setStatus(resultado.getString("Status"));
             func.setDt_criacao(resultado.getString("Dt_Criacao"));
             func.setDt_atualizacao(resultado.getString("Dt_Atualizacao"));
             func.setQtd_dependente(resultado.getInt("Qtd_Dependentes"));
@@ -163,7 +162,7 @@ public class FuncionariosDAO {
                 func.setDt_nascimento(resultado.getString("dt_nascimento"));
                 func.setNacionalidade(resultado.getString("Nacionalidade"));
                 func.setEstado_civil(resultado.getString("Estado_Civil"));
-                func.setStatus_func(resultado.getString("Status_Func"));
+                func.setStatus(resultado.getString("Status"));
                 func.setDt_criacao(resultado.getString("Dt_Criacao"));
                 func.setDt_atualizacao(resultado.getString("Dt_Atualizacao"));
                 func.setQtd_dependente(resultado.getInt("Qtd_Dependentes"));
@@ -204,7 +203,7 @@ public class FuncionariosDAO {
                     + "Dt_Nascimento, "
                     + "Nacionalidade, "
                     + "Estado_Civil, "
-                    + "Status_func, "
+                    + "Status, "
                     + "Dt_Criacao, "
                     + "Dt_Atualizacao, "
                     + "Qtd_Dependentes, "
@@ -223,7 +222,7 @@ public class FuncionariosDAO {
             st.setString(7, func.getDt_nascimento());
             st.setString(8, func.getNacionalidade());
             st.setString(9, func.getEstado_civil());
-            st.setString(10, func.getStatus_func());
+            st.setString(10, func.getStatus());
             st.setInt(11, func.getQtd_dependente());
             st.setInt(12, func.getQtd_pensionista());
 
@@ -269,7 +268,7 @@ public class FuncionariosDAO {
                     + "`Dt_Nascimento` = ?,\n"
                     + "`Nacionalidade` = ?,\n"
                     + "`Estado_Civil` =?,\n"
-                    + "`Status_func` =?,\n"
+                    + "`Status` =?,\n"
                     + "`Dt_Atualizacao` = now(),\n"
                     + "`Qtd_Dependentes` = ?,\n"
                     + "`Qtd_Pensionistas` = ?\n"
@@ -285,7 +284,7 @@ public class FuncionariosDAO {
             st.setString(6, func.getDt_nascimento());
             st.setString(7, func.getNacionalidade());
             st.setString(8, func.getEstado_civil());
-            st.setString(9, func.getStatus_func());
+            st.setString(9, func.getStatus());
             st.setInt(10, func.getQtd_dependente());
             st.setInt(11, func.getQtd_pensionista());
             st.setInt(12, func.getIdFuncionario());
