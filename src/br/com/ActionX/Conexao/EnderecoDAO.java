@@ -1,9 +1,12 @@
 package br.com.ActionX.Conexao;
 
 import br.com.ActionX.Negocio.Enderecos;
+import br.com.ActionX.Negocio.Funcionario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EnderecoDAO {
 
@@ -122,5 +125,51 @@ public class EnderecoDAO {
         }
 
     }
+    
+        public Enderecos buscaEnderecoPorIDFuncionario(int ID) throws SQLException {
+        //Conecta ao banco de dados por meio da classe de conexão
+        Conexao con = new Conexao();
+        con.getConexao(); //Obtendo a conexão
+        PreparedStatement stmt = null;
+        ResultSet resultado = null;
 
+        try {
+            String sql = "";
+            sql += "";
+            sql += " select * from enderecos where id_funcionario = ? and Status = 'ativo' order by ID_Endereco desc limit 1";
+
+            //Executa a query (comando SQL)
+            stmt = con.getConexao().prepareStatement(sql);
+            stmt.setInt(1, ID);
+            resultado = stmt.executeQuery();
+            Enderecos end = new Enderecos();
+            while(resultado.next()){
+            
+            end.setId_endereco(resultado.getInt("ID_Endereco"));
+            end.setidFuncionario(resultado.getInt("ID_funcionario"));
+            end.setLogradouro(resultado.getString("Logradouro"));
+            end.setNumero(resultado.getString("Numero"));
+            end.setComplemento(resultado.getString("Complemento"));
+            end.setCep(resultado.getString("CEP"));
+            end.setBairro(resultado.getString("Bairro"));
+            end.setCidade(resultado.getString("Cidade"));
+            end.setEstado(resultado.getString("Estado"));
+            end.setPais(resultado.getString("Pais"));
+            end.setStatus(resultado.getString("Status"));
+
+            return end;
+            }
+            return end;
+        } catch (SQLException e) { //Caso dê alguma exceção
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            // Após terminar, fecha a conexão, stmt, rs
+            resultado.close();
+            stmt.close();
+            con.getConexao().close();
+        }
+    }
+        
+        
 }

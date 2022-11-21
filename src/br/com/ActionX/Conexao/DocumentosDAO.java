@@ -131,6 +131,51 @@ public class DocumentosDAO {
 
     }
 
+      public Documentos buscaDocumentoPorIDFuncionario(int ID) throws SQLException {
+        //Conecta ao banco de dados por meio da classe de conexão
+        Conexao con = new Conexao();
+        con.getConexao(); //Obtendo a conexão
+        PreparedStatement stmt = null;
+        ResultSet resultado = null;
+
+        try {
+            String sql = "";
+            sql += "";
+            sql += " select * from documentos where id_funcionario = ? order by ID_Documento desc limit 1";
+
+            //Executa a query (comando SQL)
+            stmt = con.getConexao().prepareStatement(sql);
+            stmt.setInt(1, ID);
+            resultado = stmt.executeQuery();
+            Documentos doc = new Documentos();
+            while(resultado.next()){
+            
+            doc.setId_documento(resultado.getInt("ID_Documento"));
+            doc.setIdFuncionario(resultado.getInt("ID_funcionario"));
+            doc.setRg(resultado.getString("Rg"));
+            doc.setCpf(resultado.getString("Cpf"));
+            doc.setTitulo_eleitor(resultado.getString("Titulo_Eleitor"));
+            doc.setCtps(resultado.getString("CTPS"));
+            doc.setSerie(resultado.getString("Serie"));
+            doc.setUf(resultado.getString("UF"));
+            doc.setCertidao_nascimento(resultado.getString("Certidao_Nascimento"));
+            doc.setCertidao_civil(resultado.getString("Certidao_Civil"));
+            doc.setReservista(resultado.getString("Reservista"));
+            doc.setPis(resultado.getString("Pis"));
+
+            return doc;
+            }
+            return doc;
+        } catch (SQLException e) { //Caso dê alguma exceção
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            // Após terminar, fecha a conexão, stmt, rs
+            resultado.close();
+            stmt.close();
+            con.getConexao().close();
+        }
+    }
 
     
 }

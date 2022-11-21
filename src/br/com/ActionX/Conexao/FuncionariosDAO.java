@@ -84,13 +84,15 @@ public class FuncionariosDAO {
                     + "    funcionarios.Dt_Nascimento, "
                     + "    funcionarios.Nacionalidade, "
                     + "    funcionarios.Estado_Civil, "
-                    + "    funcionarios.Status_func, "
+                    + "    funcionarios.Status, "
                     + "    funcionarios.Dt_Criacao, "
                     + "    funcionarios.Dt_Atualizacao, "
                     + "    funcionarios.Qtd_Dependentes, "
                     + "    funcionarios.Qtd_Pensionistas "
                     + "FROM registrofuncionario.funcionarios "
-                    + "WHERE ID_Funcionario = ?";
+                    + "WHERE ID_Login = ? "
+                    + "order by dt_criacao desc "
+                    + "limit 1";
 
             //Executa a query (comando SQL)
             stmt = con.getConexao().prepareStatement(sql);
@@ -130,7 +132,7 @@ public class FuncionariosDAO {
         }
     }
 
-    public List<Funcionario> buscaListaFuncionariosPorNome(String nome) throws SQLException {
+    public List<Funcionario> buscaFuncionariosPorNome(String nome) throws SQLException {
         //Conecta ao banco de dados por meio da classe de conexão
         Conexao con = new Conexao();
         con.getConexao(); //Obtendo a conexão
@@ -184,9 +186,9 @@ public class FuncionariosDAO {
         }
     }
 
-    public void insereFuncionario(Funcionario func) {
+    public int insereFuncionario(Funcionario func) {
         Conexao conexao = new Conexao();
-
+        int id = 0;
         PreparedStatement st = null;
 
         try {
@@ -233,18 +235,21 @@ public class FuncionariosDAO {
             if (linhasAfetadas > 0) {
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.next()) {
-                    int id = rs.getInt(1);
+                    id = rs.getInt(1);
                     func.setIdFuncionario(id);
+
                 }
                 rs.close();
             } else {
                 throw new SQLException("Erro inesperado! Nenhuma linha afetada!");
             }
+            
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             conexao.fechaConexao();
+            return id;
         }
 
     }
@@ -309,5 +314,75 @@ public class FuncionariosDAO {
         }
 
     }
+    
+    public int deletaFuncionario(Funcionario func) {
+        Conexao conexao = new Conexao();
+        int id = 0;
+        PreparedStatement st = null;
+
+        try {
+
+            String sql = "";
+            sql += "";
+            sql += "INSERT INTO funcionarios"
+                    + "(ID_Login, "
+                    + "Nome, "
+                    + "Email, "
+                    + "Telefone, "
+                    + "Genero, "
+                    + "Raca, "
+                    + "Dt_Nascimento, "
+                    + "Nacionalidade, "
+                    + "Estado_Civil, "
+                    + "Status, "
+                    + "Dt_Criacao, "
+                    + "Dt_Atualizacao, "
+                    + "Qtd_Dependentes, "
+                    + "Qtd_Pensionistas)"
+                    + "VALUES"
+                    + "(?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  now(),  now(),  ?,  ?)";
+
+            st = conexao.getConexao().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            st.setInt(1, func.getIdLogin());
+            st.setString(2, func.getNome());
+            st.setString(3, func.getEmail());
+            st.setString(4, func.getTelefone());
+            st.setString(5, func.getGenero());
+            st.setString(6, func.getRaca());
+            st.setString(7, func.getDt_nascimento());
+            st.setString(8, func.getNacionalidade());
+            st.setString(9, func.getEstado_civil());
+            st.setString(10, func.getStatus());
+            st.setInt(11, func.getQtd_dependente());
+            st.setInt(12, func.getQtd_pensionista());
+
+            System.out.println(sql);
+
+            int linhasAfetadas = st.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    id = rs.getInt(1);
+                    func.setIdFuncionario(id);
+
+                }
+                rs.close();
+            } else {
+                throw new SQLException("Erro inesperado! Nenhuma linha afetada!");
+            }
+            
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            conexao.fechaConexao();
+            return id;
+        }
+
+    }
+
+    
 
 }

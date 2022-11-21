@@ -54,6 +54,62 @@ public class LoginDAO {
         }
     }
         
+        
+        public Login buscaLogin(String usuario) throws SQLException {
+            
+        Conexao con = new Conexao();
+        con.getConexao(); //Obtendo a conexão
+        PreparedStatement stmt = null;
+        ResultSet resultado = null;
+
+        //Prepara a lista de carros para retornar
+        try {
+            // Comando SQL na base = tabela de carros
+            String sql = "";
+            sql += "";
+            sql += "SELECT ID_Login, " +
+                   "Usuario, " +
+                   "Senha, " +
+                   "Dt_Criacao, " +
+                   "Dt_Atualizacao, " +
+                   "Status " +
+                   "FROM registrofuncionario.logins " +
+                   "WHERE Usuario = ? "+
+                   "AND Status = 'Ativo' "+
+                   "LIMIT 1" ;
+
+            //Executa a query (comando SQL)
+            stmt = con.getConexao().prepareStatement(sql);
+            stmt.setString(1, usuario);
+            
+            resultado = stmt.executeQuery();
+            
+            while(resultado.next()){
+            System.out.println(resultado.getString("Usuario"));
+
+            Login login = new Login();
+            
+                login.setId_login(resultado.getInt("ID_Login"));
+                login.setUsuario(resultado.getString("Usuario"));
+                login.setSenha(resultado.getString("Senha"));
+                login.setDt_criacao(resultado.getString("Dt_Criacao"));
+                login.setDt_atualizacao(resultado.getString("Dt_Atualizacao"));
+            
+            return login;    
+            }
+            // Retorna a lista de carros
+            return null;
+        } catch (SQLException e) { //Caso dê alguma exceção
+             System.out.println(e.getMessage());
+            return null;
+        } finally {
+            // Após terminar, fecha a conexão, stmt, rs
+            resultado.close();
+            stmt.close();
+            con.getConexao().close();
+        }
+    }
+        
         public void insereLogin(Login us) {
         Conexao conexao = new Conexao();
 
@@ -75,8 +131,6 @@ public class LoginDAO {
 
             st.setString(1, us.getUsuario());
             st.setString(2, us.getSenha());
-            st.setString(3, us.getDt_criacao());
-            st.setString(4, us.getDt_atualizacao());
             
 
             System.out.println(sql);

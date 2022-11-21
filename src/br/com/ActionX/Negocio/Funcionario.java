@@ -17,8 +17,7 @@ public class Funcionario {
     private String dt_atualizacao;
     private int qtd_dependente;
     private int qtd_pensionista;
-    private String status;
-    
+    private String status;    
     
     public Funcionario(){
         
@@ -160,10 +159,6 @@ public class Funcionario {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setStatus_func(String a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

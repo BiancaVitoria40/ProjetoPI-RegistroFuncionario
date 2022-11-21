@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class RedefineSenhasDAO {
     
-        public void insereSolicitacao(RedefineSenhas senha) {
+        public void insereSolicitacao(int id) {
         Conexao conexao = new Conexao();
-
+        RedefineSenhas senha = new RedefineSenhas();
         PreparedStatement st = null;
 
         try {
@@ -24,7 +24,7 @@ public class RedefineSenhasDAO {
 
             st = conexao.getConexao().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             
-            st.setInt(1, senha.getId_redefineSenhas());
+            st.setInt(1, id);
 
             System.out.println(sql);
 
@@ -33,8 +33,8 @@ public class RedefineSenhasDAO {
             if (linhasAfetadas > 0) {
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.next()) {
-                    int id = rs.getInt(1);
-                    senha.setId_redefineSenhas(id);
+                    int ids = rs.getInt(1);
+                    senha.setId_redefineSenhas(ids);
                 }
                 rs.close();
             } else {
