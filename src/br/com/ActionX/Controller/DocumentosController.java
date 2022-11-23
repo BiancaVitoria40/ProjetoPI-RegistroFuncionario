@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.ActionX.Controller;
 
-import br.com.ActionX.Conexao.DadosBancariosDAO;
 import br.com.ActionX.Conexao.DocumentosDAO;
-import br.com.ActionX.Negocio.DadosBancarios;
 import br.com.ActionX.Negocio.Documentos;
 import java.sql.SQLException;
 
@@ -16,12 +10,10 @@ import java.sql.SQLException;
  */
 public class DocumentosController {
     
-    public boolean CriaDocumentos (Documentos doc){
+    public int CriaDocumentos (Documentos doc){
         DocumentosDAO dDAO = new DocumentosDAO();
         
-        dDAO.insereDocumetos(doc);
-        
-        return true;
+        return dDAO.insereDocumetos(doc);
     }
     
         public Documentos BuscaDocumentos(int id) throws SQLException{
@@ -29,6 +21,11 @@ public class DocumentosController {
         DocumentosDAO docDAO = new DocumentosDAO();
         doc = docDAO.buscaDocumentoPorIDFuncionario(id);
         return doc;
+    }
+        
+    public void AtualizaDocumentos (Documentos doc){
+        DocumentosDAO dDAO = new DocumentosDAO();
+        dDAO.atualizaDocumentos(doc);
     }
     
 }

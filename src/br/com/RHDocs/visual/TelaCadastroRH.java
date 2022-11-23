@@ -12,12 +12,13 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 
 /**
  *
  * @author biads
  */
-public class TelaCadastro extends javax.swing.JFrame {
+public class TelaCadastroRH extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaCadastro
@@ -27,13 +28,16 @@ public class TelaCadastro extends javax.swing.JFrame {
     String modo;
     int idFunc, idEnd, idDoc, idDB;
 
-    public TelaCadastro(String idLogin) throws SQLException {
+    public TelaCadastroRH(String idLogin) throws SQLException {
 
         initComponents();
         txtIdLogin.setVisible(false);
         txtIdLogin.setText(idLogin);
         lblIDFunc.setVisible(false);
-
+        this.setDefaultCloseOperation(0);
+        setUndecorated(true);
+        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        
         FuncionarioController funcCont = new FuncionarioController();
         Funcionario func = new Funcionario();
         func = funcCont.BuscaFuncionarioPorID(Integer.parseInt(idLogin));
@@ -58,7 +62,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
             txtNomeCadastro.setText(func.getNome());
             txtEmailCadastro.setText(func.getEmail());
-            txtTelefoneCadastro.setText(func.getTelefone());
+            txtTelefoneCadastro.setText(func.getEmail());
             txtDataNascimentoCadastro.setText(func.getDt_nascimento());
             txtGeneroCadastro.setText(func.getGenero());
             txtRacaCadastro.setText(func.getRaca());
@@ -114,6 +118,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
     }
 
+    TelaCadastroRH() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -122,6 +130,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        lblDependenteCadastro = new javax.swing.JLabel();
+        lblRecadoCadastro = new javax.swing.JLabel();
         btnDependente = new javax.swing.JButton();
         btnSalvarCadastro = new javax.swing.JButton();
         btnSairCadastro = new javax.swing.JButton();
@@ -197,6 +207,13 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        lblDependenteCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDependenteCadastro.setForeground(new java.awt.Color(0, 0, 0));
+        lblDependenteCadastro.setText("Deseja cadastrar dependente ?");
+
+        lblRecadoCadastro.setForeground(new java.awt.Color(102, 102, 102));
+        lblRecadoCadastro.setText("Se sim, aperte o botão abaixo");
+
         btnDependente.setBackground(new java.awt.Color(0, 0, 153));
         btnDependente.setForeground(new java.awt.Color(255, 255, 255));
         btnDependente.setText("Dependente");
@@ -217,7 +234,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         btnSairCadastro.setBackground(new java.awt.Color(0, 0, 204));
         btnSairCadastro.setForeground(new java.awt.Color(255, 255, 255));
-        btnSairCadastro.setText("Sair");
+        btnSairCadastro.setText("Voltar");
         btnSairCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairCadastroActionPerformed(evt);
@@ -228,7 +245,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         lblCadastro.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblCadastro.setForeground(new java.awt.Color(0, 0, 0));
-        lblCadastro.setText("Cadastro Funcionario");
+        lblCadastro.setText("Cadastro");
 
         lblNomeCadastro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNomeCadastro.setForeground(new java.awt.Color(0, 0, 0));
@@ -295,27 +312,28 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNomeCadastro))
-                                .addGap(51, 51, 51)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEmailCadastro))
-                                .addGap(18, 18, 18)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTelefoneCadastro)
-                                    .addComponent(txtTelefoneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblNomeCadastro)
+                                .addGap(282, 282, 282)
+                                .addComponent(lblEmailCadastro))
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(232, 232, 232)
-                                .addComponent(lblCadastro)))
-                        .addGap(178, 178, 178)
+                                .addGap(357, 357, 357)
+                                .addComponent(lblCadastro))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(txtNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(42, 42, 42)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIDFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblIDFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIdLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblTelefoneCadastro)
+                                .addComponent(txtTelefoneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,22 +363,23 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(lblCadastro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(13, 13, 13)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEmailCadastro)
-                            .addComponent(lblTelefoneCadastro)
                             .addComponent(lblNomeCadastro))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefoneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(txtIdLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblIDFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 16, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)
+                        .addComponent(lblTelefoneCadastro)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtTelefoneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -728,28 +747,30 @@ public class TelaCadastro extends javax.swing.JFrame {
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(panel3Layout.createSequentialGroup()
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                         .addComponent(txtCodBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtAgenciaBancoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(200, 200, 200)
+                        .addComponent(txtTipoConta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(txtContaBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(txtDigitoBancoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panel3Layout.createSequentialGroup()
-                        .addComponent(lblCodBanco)
-                        .addGap(48, 48, 48)
-                        .addComponent(lblAgenciaBancoCadastro)))
-                .addGap(59, 59, 59)
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblContaBancoCadastro)
-                    .addComponent(txtTipoConta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContaBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDigitoBancoCadastro1))
-                .addGap(39, 39, 39)
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDigitoBancoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDigitoBancoCadastro))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtAgenciaBancoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addComponent(lblCodBanco)
+                                .addGap(48, 48, 48)
+                                .addComponent(lblAgenciaBancoCadastro)))
+                        .addGap(59, 59, 59)
+                        .addComponent(lblContaBancoCadastro)
+                        .addGap(72, 72, 72)
+                        .addComponent(lblDigitoBancoCadastro1)
+                        .addGap(126, 126, 126)
+                        .addComponent(lblDigitoBancoCadastro)
+                        .addContainerGap(15, Short.MAX_VALUE))))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -761,14 +782,14 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(lblContaBancoCadastro)
                     .addComponent(lblDigitoBancoCadastro1)
                     .addComponent(lblDigitoBancoCadastro))
-                .addGap(5, 5, 5)
+                .addGap(18, 18, 18)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAgenciaBancoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTipoConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtContaBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDigitoBancoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 51, Short.MAX_VALUE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -776,13 +797,19 @@ public class TelaCadastro extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnDependente)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblDependenteCadastro)
+                    .addComponent(lblRecadoCadastro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvarCadastro)
                 .addGap(18, 18, 18)
                 .addComponent(btnSairCadastro)
                 .addGap(86, 86, 86))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(btnDependente)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -790,7 +817,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -804,16 +831,20 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDependenteCadastro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRecadoCadastro)
                     .addComponent(btnSalvarCadastro)
-                    .addComponent(btnSairCadastro)
-                    .addComponent(btnDependente))
-                .addContainerGap(252, Short.MAX_VALUE))
+                    .addComponent(btnSairCadastro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDependente)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(908, 921));
+        setSize(new java.awt.Dimension(866, 921));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -822,17 +853,14 @@ public class TelaCadastro extends javax.swing.JFrame {
             TelaConsultaDependente telaDeCunsultaDependente = new TelaConsultaDependente(idFunc);
             telaDeCunsultaDependente.setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaCadastroRH.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
     }//GEN-LAST:event_btnDependenteActionPerformed
 
     private void btnSairCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairCadastroActionPerformed
-        int res = JOptionPane.showConfirmDialog(null, "Dejesa realmente sair?", "Sair", JOptionPane.YES_NO_OPTION);
-        if (res == JOptionPane.YES_OPTION) {
-            new TelaLogin().setVisible(true);
             this.dispose();
-        }
+        
 
     }//GEN-LAST:event_btnSairCadastroActionPerformed
 
@@ -912,7 +940,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Cadastro atualizados com sucesso!");
             } catch (SQLException ex) {
-                Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCadastroRH.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnSalvarCadastroActionPerformed
@@ -942,14 +970,15 @@ public class TelaCadastro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroRH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -980,6 +1009,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lblContaBancoCadastro;
     private javax.swing.JLabel lblCtNascimento;
     private javax.swing.JLabel lblDataNascimentoCadastro;
+    private javax.swing.JLabel lblDependenteCadastro;
     private javax.swing.JLabel lblDigitoBancoCadastro;
     private javax.swing.JLabel lblDigitoBancoCadastro1;
     private javax.swing.JLabel lblEleitorCadastro;
@@ -996,6 +1026,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lblPis;
     private javax.swing.JLabel lblRGCadastro;
     private javax.swing.JLabel lblRacaCadastro;
+    private javax.swing.JLabel lblRecadoCadastro;
     private javax.swing.JLabel lblReservista;
     private javax.swing.JLabel lblSerie;
     private javax.swing.JLabel lblTelefoneCadastro;

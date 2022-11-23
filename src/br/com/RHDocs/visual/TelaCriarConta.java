@@ -10,8 +10,10 @@ import javax.swing.JOptionPane;
  * @author biads
  */
 public class TelaCriarConta extends javax.swing.JFrame {
-
-    public TelaCriarConta() {
+    
+    static String tipoFunc = "Funcionario";
+    
+    public TelaCriarConta(String tipo) {
         initComponents();
     }
 
@@ -37,7 +39,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
         lblLogoRHDocs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/RHDocs/imagens/logoRHDocs.png"))); // NOI18N
         lblLogoRHDocs.setText("jLabel1");
@@ -176,7 +178,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(btnCriar)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,7 +197,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(983, 527));
+        setSize(new java.awt.Dimension(983, 539));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -210,6 +212,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
        new TelaLogin().setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
@@ -234,7 +237,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
         }else{
             LoginController lCont = new LoginController();
             
-            if(lCont.CriaLogin(email, senha)){
+            if(lCont.CriaLogin(email, senha, tipoFunc)){
                 JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!");
                 new TelaLogin().setVisible(true);   
                 this.dispose();
@@ -293,7 +296,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCriarConta().setVisible(true);
+                new TelaCriarConta(tipoFunc).setVisible(true);
             }
         });
     }

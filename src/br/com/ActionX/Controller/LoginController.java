@@ -27,7 +27,7 @@ public class LoginController {
         return null;
     }
     
-    public boolean CriaLogin(String usuario, String senha){
+    public boolean CriaLogin(String usuario, String senha, String tipo){
             LoginDAO loginDAO = new LoginDAO();
             Login login = new Login();
             Login login2 = new Login();

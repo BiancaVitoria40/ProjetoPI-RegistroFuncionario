@@ -14,11 +14,10 @@ import java.sql.SQLException;
  */
 public class DadosBancariosController {
     
-    public boolean InsereDadosBancarios(DadosBancarios db){
+    public int InsereDadosBancarios(DadosBancarios db){
         DadosBancariosDAO dbDAO = new DadosBancariosDAO();
         
-        dbDAO.insereDadosBancarios(db);
-        return true;
+        return dbDAO.insereDadosBancarios(db);
     }
     
     public DadosBancarios BuscaDadosBancarios(int id) throws SQLException{
@@ -26,5 +25,10 @@ public class DadosBancariosController {
         DadosBancariosDAO dbDAO = new DadosBancariosDAO();
         db = dbDAO.buscaDadosBancariosPorIDFuncionario(id);
         return db;
+    }
+    
+    public void AtualizaDadosBancarios(DadosBancarios db) throws SQLException{
+        DadosBancariosDAO dbDAO = new DadosBancariosDAO();
+        dbDAO.atualizaDadosBancarios(db);
     }
 }

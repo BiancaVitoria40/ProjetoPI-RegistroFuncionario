@@ -1,6 +1,6 @@
 package br.com.ActionX.Negocio;
 
-public class Login {
+public class LoginCompleto {
     
     private int id_login;
     private String usuario;
@@ -8,19 +8,19 @@ public class Login {
     private String dt_criacao;
     private String dt_atualizacao;
     private String tipo_login;
-    private String status;
+    private String Nome;
 
-    public Login() {
+    public LoginCompleto() {
     }
 
-    public Login(int id_login, String usuario, String senha, String dt_criacao, String dt_atualizacao, String tipo_login, String status) {
+    public LoginCompleto(int id_login, String usuario, String senha, String dt_criacao, String dt_atualizacao, String tipo_login, String Nome) {
         this.id_login = id_login;
         this.usuario = usuario;
         this.senha = senha;
         this.dt_criacao = dt_criacao;
         this.dt_atualizacao = dt_atualizacao;
         this.tipo_login = tipo_login;
-        this.status = status;
+        this.Nome = Nome;
     }
 
     public int getId_login() {
@@ -71,13 +71,14 @@ public class Login {
         this.tipo_login = tipo_login;
     }
 
-    public String getStatus() {
-        return status;
+    public String getNome() {
+        return Nome;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
     }
 
+    
     
 }

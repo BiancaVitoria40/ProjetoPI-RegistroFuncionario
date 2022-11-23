@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.ActionX.Controller;
 
-import br.com.ActionX.Conexao.DocumentosDAO;
 import br.com.ActionX.Conexao.EnderecoDAO;
-import br.com.ActionX.Negocio.Documentos;
 import br.com.ActionX.Negocio.Enderecos;
 import java.sql.SQLException;
 
@@ -16,11 +10,10 @@ import java.sql.SQLException;
  */
 public class EnderecoController {
     
-    public boolean InsereEndereco (Enderecos end){
+    public int InsereEndereco (Enderecos end){
         
         EnderecoDAO endDAO = new EnderecoDAO();
-        endDAO.insereEndereco(end);
-        return true;
+        return endDAO.insereEndereco(end);
     }
     
         public Enderecos BuscaEndereco(int id) throws SQLException{
@@ -28,6 +21,11 @@ public class EnderecoController {
         EnderecoDAO endDAO = new EnderecoDAO();
         end = endDAO.buscaEnderecoPorIDFuncionario(id);
         return end;
+    }
+        
+    public void AtualizaEnderecos (Enderecos end){
+        EnderecoDAO endDAO = new EnderecoDAO();
+        endDAO.atualizaEndereco(end);
     }
     
 }

@@ -13,12 +13,14 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    
+    String tipo;
+
     public TelaLogin() {
         initComponents();
+        this.getRootPane().setDefaultButton(btnEntrar);
+
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,6 +37,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         btnEsqueci = new javax.swing.JButton();
         btnVoltaLogin = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,10 +98,19 @@ public class TelaLogin extends javax.swing.JFrame {
 
         btnVoltaLogin.setBackground(new java.awt.Color(0, 0, 204));
         btnVoltaLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnVoltaLogin.setText("Voltar");
+        btnVoltaLogin.setText("Criar conta");
         btnVoltaLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltaLoginActionPerformed(evt);
+            }
+        });
+
+        btnSair.setBackground(new java.awt.Color(0, 0, 204));
+        btnSair.setForeground(new java.awt.Color(255, 255, 255));
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -126,8 +138,10 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap(187, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSair)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVoltaLogin)
-                .addGap(32, 32, 32))
+                .addGap(67, 67, 67))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,11 +159,13 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEsqueci, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEsqueci)
                 .addGap(51, 51, 51)
                 .addComponent(btnEntrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                .addComponent(btnVoltaLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltaLogin)
+                    .addComponent(btnSair))
                 .addContainerGap())
         );
 
@@ -176,33 +192,54 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         LoginController lc = new LoginController();
         Login login = new Login();
-        
-        try {
-            login = lc.ValidaLogin(txtEmail.getText(), txtSenha.getText());
-            
-            if(login != null){
-            TelaCadastro telaDeCadastro = new TelaCadastro(Integer.toString(login.getId_login()));
-            telaDeCadastro.setVisible(true);
-            this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos!");
+
+        if (txtEmail.getText().equals("") || txtSenha.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        } else {
+            try {
+                login = lc.ValidaLogin(txtEmail.getText(), txtSenha.getText());
+
+                if (login != null) {
+                    if (login.getStatus().equals("Inativo")) {
+                        JOptionPane.showMessageDialog(null, "Usuario inativo, entre em contato com o RH.");
+                    } else {
+                        if (login.getTipo_login().equals("Funcionario")) {
+                            TelaCadastro telaDeCadastro = new TelaCadastro(Integer.toString(login.getId_login()));
+                            telaDeCadastro.setVisible(true);
+                            this.dispose();
+                        } else if (login.getTipo_login().equals("RH")) {
+                            TelaRhPrincipal telaRH = new TelaRhPrincipal();
+                            telaRH.setVisible(true);
+                            this.dispose();
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnEsqueciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsqueciActionPerformed
-        TelaRedefinirSenha telaDeRedefinirSenha = new TelaRedefinirSenha();
+        TelaSolicitacaoSenha telaDeRedefinirSenha = new TelaSolicitacaoSenha();
         telaDeRedefinirSenha.setVisible(true);
     }//GEN-LAST:event_btnEsqueciActionPerformed
 
     private void btnVoltaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaLoginActionPerformed
-        TelaCriarConta tl = new TelaCriarConta();
+        TelaCriarConta tl = new TelaCriarConta(tipo);
         tl.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltaLoginActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        int res = JOptionPane.showConfirmDialog(null, "Dejesa realmente sair?", "Sair", JOptionPane.YES_NO_OPTION);
+        if (res == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +279,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnEsqueci;
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnVoltaLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

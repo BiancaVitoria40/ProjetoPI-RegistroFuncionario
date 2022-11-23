@@ -22,10 +22,15 @@ public class FuncionarioController {
         return fDAO.insereFuncionario(func);
     }
     
-    public Funcionario BuscaFuncionario(int id) throws SQLException{
+    public Funcionario BuscaFuncionarioPorID(int id) throws SQLException{
         Funcionario func = new Funcionario();
         FuncionariosDAO funcDAO = new FuncionariosDAO();
         func = funcDAO.buscaFuncionarioPorID(id);
         return func;
+    }
+    
+    public void AtualizaFuncionario(Funcionario func){
+        FuncionariosDAO fDAO = new FuncionariosDAO();
+        fDAO.atualizaFuncionario(func);
     }
 }
