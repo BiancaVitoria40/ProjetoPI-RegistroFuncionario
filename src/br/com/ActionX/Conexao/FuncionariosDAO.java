@@ -120,7 +120,7 @@ public class FuncionariosDAO {
 
             return func;
             }
-            return func;
+            return null;
         } catch (SQLException e) { //Caso dê alguma exceção
             System.out.println(e.getMessage());
             return null;
@@ -132,6 +132,75 @@ public class FuncionariosDAO {
         }
     }
 
+    public Funcionario buscaFuncionarioPorIDFunc(int ID) throws SQLException {
+        //Conecta ao banco de dados por meio da classe de conexão
+        Conexao con = new Conexao();
+        con.getConexao(); //Obtendo a conexão
+        PreparedStatement stmt = null;
+        ResultSet resultado = null;
+
+        try {
+            String sql = "";
+            sql += "";
+            sql
+                    += "SELECT funcionarios.ID_Funcionario, "
+                    + "    funcionarios.ID_Login, "
+                    + "    funcionarios.Nome, "
+                    + "    funcionarios.Email, "
+                    + "    funcionarios.Telefone, "
+                    + "    funcionarios.Genero, "
+                    + "    funcionarios.Raca, "
+                    + "    funcionarios.Dt_Nascimento, "
+                    + "    funcionarios.Nacionalidade, "
+                    + "    funcionarios.Estado_Civil, "
+                    + "    funcionarios.Status, "
+                    + "    funcionarios.Dt_Criacao, "
+                    + "    funcionarios.Dt_Atualizacao, "
+                    + "    funcionarios.Qtd_Dependentes, "
+                    + "    funcionarios.Qtd_Pensionistas "
+                    + "FROM registrofuncionario.funcionarios "
+                    + "WHERE ID_Funcionario = ? "
+                    + "order by dt_criacao desc "
+                    + "limit 1";
+
+            //Executa a query (comando SQL)
+            stmt = con.getConexao().prepareStatement(sql);
+            stmt.setInt(1, ID);
+            resultado = stmt.executeQuery();
+            Funcionario func = new Funcionario();
+            while(resultado.next()){
+            
+
+            func.setIdFuncionario(resultado.getInt("ID_Funcionario"));
+            func.setNome(resultado.getString("nome"));
+            func.setEmail(resultado.getString("email"));
+            func.setTelefone(resultado.getString("Telefone"));
+            func.setGenero(resultado.getString("Genero"));
+            func.setRaca(resultado.getString("Raca"));
+            func.setDt_nascimento(resultado.getString("dt_nascimento"));
+            func.setNacionalidade(resultado.getString("Nacionalidade"));
+            func.setEstado_civil(resultado.getString("Estado_Civil"));
+            func.setStatus(resultado.getString("Status"));
+            func.setDt_criacao(resultado.getString("Dt_Criacao"));
+            func.setDt_atualizacao(resultado.getString("Dt_Atualizacao"));
+            func.setQtd_dependente(resultado.getInt("Qtd_Dependentes"));
+            func.setQtd_pensionista(resultado.getInt("Qtd_Pensionistas"));
+            func.setIdLogin(resultado.getInt("ID_Login"));
+
+            return func;
+            }
+            return func;
+        } catch (SQLException e) { //Caso dê alguma exceção
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            // Após terminar, fecha a conexão, stmt, rs
+            resultado.close();
+            stmt.close();
+            con.getConexao().close();
+        }
+    }    
+    
     public List<Funcionario> buscaFuncionariosPorNome(String nome) throws SQLException {
         //Conecta ao banco de dados por meio da classe de conexão
         Conexao con = new Conexao();
@@ -237,7 +306,7 @@ public class FuncionariosDAO {
                 if (rs.next()) {
                     id = rs.getInt(1);
                     func.setIdFuncionario(id);
-
+                    return id;    
                 }
                 rs.close();
             } else {
@@ -263,21 +332,20 @@ public class FuncionariosDAO {
 
             String sql = "";
             sql += "";
-            sql += "UPDATE `funcionarios`\n"
-                    + "SET\n"
-                    + "`Nome` = ?,\n"
-                    + "`Email` = ?,\n"
-                    + "`Telefone` = ?,\n"
-                    + "`Genero` = ?,\n"
-                    + "`Raca` = ?,\n"
-                    + "`Dt_Nascimento` = ?,\n"
-                    + "`Nacionalidade` = ?,\n"
-                    + "`Estado_Civil` =?,\n"
-                    + "`Status` =?,\n"
-                    + "`Dt_Atualizacao` = now(),\n"
-                    + "`Qtd_Dependentes` = ?,\n"
-                    + "`Qtd_Pensionistas` = ?\n"
-                    + "WHERE `ID_Funcionario` = ?;";
+            sql += "UPDATE funcionarios"
+                    + " SET"
+                    + " Nome = ?,"
+                    + " Email = ?,"
+                    + " Telefone = ?,"
+                    + " Genero = ?,"
+                    + " Raca = ?,"
+                    + " Dt_Nascimento = ?,"
+                    + " Nacionalidade = ?,"
+                    + " Estado_Civil =?,"
+                    + " Status =?,"
+                    + " Dt_Atualizacao = now(),"
+                    + " Qtd_Dependentes = ?"
+                    + " WHERE ID_Funcionario = ?;";
 
             st = conexao.getConexao().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -291,8 +359,7 @@ public class FuncionariosDAO {
             st.setString(8, func.getEstado_civil());
             st.setString(9, func.getStatus());
             st.setInt(10, func.getQtd_dependente());
-            st.setInt(11, func.getQtd_pensionista());
-            st.setInt(12, func.getIdFuncionario());
+            st.setInt(11, func.getIdFuncionario());
 
             int linhasAfetadas = st.executeUpdate();
 

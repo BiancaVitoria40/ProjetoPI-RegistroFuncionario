@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class DadosBancariosDAO {
     
-        public void insereDadosBancarios(DadosBancarios banco) {
+        public int insereDadosBancarios(DadosBancarios banco) {
         Conexao conexao = new Conexao();
 
         PreparedStatement st = null;
@@ -47,6 +47,7 @@ public class DadosBancariosDAO {
                 if (rs.next()) {
                     int id = rs.getInt(1);
                     banco.setId_dadosBancarios(id);
+                    return id;
                 }
                 rs.close();
             } else {
@@ -58,7 +59,7 @@ public class DadosBancariosDAO {
         } finally {
             conexao.fechaConexao();
         }
-
+        return 0;
     }
         
         public void atualizaDadosBancarios(DadosBancarios banco) {
@@ -70,26 +71,25 @@ public class DadosBancariosDAO {
 
             String sql = "";
             sql += "";
-            sql += "UPDATE registrofuncionario.dadosbancarios" +
+            sql += "UPDATE registrofuncionario.dadosbancarios " +
                     "SET" +
-                    "ID_Funcionario = ?," +
-                    "Cod_banco = ?," +
-                    "Agencia = ?," +
-                    "Tipo_Conta = ?," +
-                    "Conta = ?," +
-                    "Digito = ?," +
-                    "Status = ?" +
-                    "WHERE ID_DadosBancarios = ?;";
+                    " Cod_banco = ?," +
+                    " Agencia = ?," +
+                    " Tipo_Conta = ?," +
+                    " Conta = ?," +
+                    " Digito = ?," +
+                    " Status = ?" +
+                    " WHERE ID_DadosBancarios = ?;";
 
             st = conexao.getConexao().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            st.setInt(1, banco.getIdFuncionario());
-            st.setString(2, banco.getCod_banco());
-            st.setString(3, banco.getAgencia());
-            st.setString(4, banco.getTipo_conta());
-            st.setString(5, banco.getConta());
-            st.setString(6, banco.getDigito());
-            st.setString(7, banco.getStatus());
+            st.setString(1, banco.getCod_banco());
+            st.setString(2, banco.getAgencia());
+            st.setString(3, banco.getTipo_conta());
+            st.setString(4, banco.getConta());
+            st.setString(5, banco.getDigito());
+            st.setString(6, banco.getStatus());
+            st.setInt(7, banco.getId_dadosBancarios());
 
             System.out.println(sql);
 
